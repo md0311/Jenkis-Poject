@@ -2,83 +2,80 @@ pipeline {
     agent any
 
     options {
-        quietPeriod(2) // Setting up the delay of 2 seconds
+        quietPeriod(2)
     }
     
     stages {
         stage('Build') {
             steps {
-                echo "Building the code using Maven"
+                echo "Using Maven to construct the code"
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo "Running unit tests using Selenium"
-                echo "Running integration tests using Selenium"
+                echo "Using Selenium to run unit tests"
+                echo "Using Selenium to perform integration tests"
             }
             post {
                 success {
                     emailext to: 's223535953@deakin.edu.au',
-                             subject: 'Unit and Integration Tests has Passed successfully',
-                             body: 'Unit and integration tests passed successfully.',
+                             subject: 'Passed the Integration and Unit Tests',
+                             body: 'Integration and unit tests were successfully completed.',
                             attachLog: true
-                             // Sending notification email on success with logs as attachments after the testing is complete
                 }
                 failure {
                     emailext to: 's223535953@deakin.edu.au',
-                             subject: 'Unit and Integration Tests Failed',
-                             body: 'Unit and integration tests failed. Please check the logs for details.',
+                             subject: 'Failure of the Unit and Integration Tests',
+                             body: 'Integration and unit tests were unsuccessful. To learn more, please review the logs.',
                              attachLog: true 
-                             // Sending notification email on failure with logs as attachment if the testing stage fails
-                }
+                        }
             }
         }
         stage('Code Analysis') {
             steps {
-                echo "Performing code analysis using SonarQube"
+                echo "Using SonarQube for code analysis"
             }
         }
 
         stage('Code Improvement') {
             steps {
-                echo "Code Improved"
+                echo "Improve code"
             }
         }
          
         stage('Security Scan') {
             steps {
-                echo "Performing security scan using OWASP Dependency-Check"
+                echo "Securing a network with OWASP Dependency-Check"
             }
             post {
                 success {
                     emailext to: 's223535953@deakin.edu.au',
-                             subject: 'Security Scan Passed Successfully',
-                             body: 'Security scan passed successfully. Making new commit',
+                             subject: 'Security Scan was successfully completed.',
+                             body: 'The security scan was successfully completed. Creating a fresh commitment',
                              attachLog: true
-                             // Sending notification email on success with logs as an attachment after security scans passed successfully
-                }
+                        }
                 failure {
                     emailext to: 's223535953@deakin.edu.au',
-                             subject: 'Security Scan Failed',
-                             body: 'Security scan failed.',
+                             subject: 'Security Check Erroneous',
+                             body: 'Security Check Erroneous.',
                              attachLog: true
-                             // Sending notification email on failure with logs as attachment if the security scans fail.
-                }
+                        }
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying the application to the staging server in AWS with EC2 instance"
+                echo "Using an EC2 instance to deploy the application to the staging server in Amazon
+"
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Running integration tests on the staging environment"
+                echo "utilising the staging environment to conduct integration tests"
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the application to the production server AWS EC2 instance"
+                echo "Installing the programme on the AWS EC2 instance serving as the production server"
             }
         }
     }
