@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     emailext to: 's223535953@deakin.edu.au',
-                             subject: 'Passed the Integration and Unit Tests',
+                             subject: 'Passed the Integration and Unit Tests successfully',
                              body: 'Integration and unit tests were successfully completed.',
                             attachLog: true
                 }
